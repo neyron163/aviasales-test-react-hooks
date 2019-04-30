@@ -1,0 +1,16 @@
+[ignore]
+.*/node_modules/*
+.*/build/*
+
+[include]
+
+[libs]
+./src/app.js
+
+[lints]
+
+[options]
+module.name_mapper='^\(.*\)\.css$' -> 'CSSModule'
+module.system=haste
+
+[strict]

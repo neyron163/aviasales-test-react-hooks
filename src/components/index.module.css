@@ -1,0 +1,24 @@
+.app {
+  display: flex;
+  max-width: 800px;
+  margin: 100px auto 0;
+}
+
+.currency {
+  display: flex;
+  margin-bottom: 20px;
+}
+
+.left {
+  width: 30%;
+}
+
+.right {
+  width: 70%;
+}
+
+.amountTitle {
+  margin-bottom: 20px;
+  font-family: "Germania One", cursive;
+  font-size: 14px;
+}
