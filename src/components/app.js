@@ -22,10 +22,9 @@ export function App() {
       .map(el => ({
         number: el
       }));
-
-    setStops(sort);
-    setOrginalData(sort.map(el => el));
-  });
+      setStops(sort);
+      setOrginalData(sort.map(el => el));
+  }, []);
 
   function onlyCurrent(stop) {
     setData([stop]);
@@ -56,6 +55,7 @@ export function App() {
         <div className={s.currency}>
           {CURRENCY.map(el => (
             <Currency
+              key={el.name}
               setCurrency={setCurrency}
               name={el.name}
               currency={currency}
@@ -65,14 +65,15 @@ export function App() {
         <div>
           <div className={s.amountTitle}>Количество пересадок</div>
           {data.length >= originalData.length ? (
-            <Checkbox stop={ALL} onClick={onClick} data />
+            <Checkbox stop={ALL} onClick={onClick} data key="all" />
           ) : (
-            <Checkbox stop={ALL} onClick={onClick} />
+            <Checkbox stop={ALL} onClick={onClick} key="all" />
           )}
 
           {stops.map(el =>
             data.includes(el.number) ? (
               <Checkbox
+                key={el.number + 1}
                 stop={el.number}
                 onClick={onClick}
                 onlyCurrent={onlyCurrent}
@@ -80,6 +81,7 @@ export function App() {
               />
             ) : (
               <Checkbox
+                key={el.number}
                 stop={el.number}
                 onClick={onClick}
                 onlyCurrent={onlyCurrent}
@@ -89,9 +91,9 @@ export function App() {
         </div>
       </div>
       <div className={s.right}>
-        {data.map(el => (
-          <Item amount={el} currency={currency} />
-        ))}
+          {data.map(el => (
+              <Item amount={el} currency={currency} />
+          ))}
       </div>
     </div>
   );

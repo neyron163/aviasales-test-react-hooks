@@ -42,7 +42,7 @@
   margin-right: 40px;
   font-size: 13px;
   line-height: 13px;
-  font-weight: 700;
+  font-weight: 600;
 }
 
 .dateFlight {
@@ -69,8 +69,7 @@
 .departureTime,
 .arrivalTime {
   font-size: 30px;
-  font-weight: 700;
-  font-family: "Germania One", cursive;
+  font-weight: 600;
 }
 
 .transfer {
@@ -78,7 +77,6 @@
   position: relative;
   line-height: 14px;
   font-size: 14px;
-  font-family: "Germania One", cursive;
 }
 
 .transfer::after {
@@ -89,4 +87,16 @@
   height: 1px;
   width: 100%;
   bottom: 15px;
+}
+
+.transferWrap {
+  display: flex;
+}
+
+.leftPlane {
+  transform: rotate(-30deg);
+}
+
+.rightPlane {
+  transform: rotate(30deg);
 }
