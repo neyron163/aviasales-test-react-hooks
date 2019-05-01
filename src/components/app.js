@@ -9,45 +9,46 @@ import s from "./index.module.css";
 
 export function App() {
   const [currency, setCurrency] = useState("RUB");
-  const [data, setData] = useState([0, 1, 2, 3]);
+  const [data, setData] = useState([]);
   const [originalData, setOrginalData] = useState([]);
   const [stops, setStops] = useState([]);
 
   useEffect(() => {
-    const stops = DATA.tickets.map(el => el.stops);
-
-    const sort = stops
+    const sort = DATA.tickets
+      .map(el => el.stops)
       .filter((value, index, self) => self.indexOf(value) === index)
       .sort()
-      .map(el => ({
-        number: el
-      }));
-      setStops(sort);
-      setOrginalData(sort.map(el => el));
+      .map(el => el);
+
+    setStops(sort);
+    setData(sort);
+    setOrginalData(sort);
   }, []);
 
   function onlyCurrent(stop) {
     setData([stop]);
   }
 
-  const joinArrays = (
-    currentData,
-    newData = originalData.map(el => el.number)
-  ) => currentData.concat(newData);
-
   function onClick(stop) {
-    let currentData = data.map(el => el);
-    const length = currentData.length !== originalData.length;
-
-    if (currentData.includes(stop)) {
-      currentData = currentData.filter(el => el !== stop);
-    } else if (stop === ALL) {
-      currentData = [];
-      currentData = length ? joinArrays(currentData) : [];
+    if (stop === ALL) {
+      setData(data.length ? [] : [...originalData]);
     } else {
-      currentData = joinArrays(currentData, [stop]);
+      setData(
+        data.includes(stop)
+          ? data.filter(el => el !== stop)
+          : data.concat([stop])
+      );
     }
-    setData(currentData);
+    // short variant
+    // setData(
+    //   stop === ALL
+    //     ? data.length
+    //       ? []
+    //       : [0, 1, 2, 3]
+    //     : data.includes(stop)
+    //     ? data.filter(el => el !== stop)
+    //     : data.concat([stop])
+    // );
   }
   return (
     <div className={s.app}>
@@ -65,24 +66,23 @@ export function App() {
         <div>
           <div className={s.amountTitle}>Количество пересадок</div>
           {data.length >= originalData.length ? (
-            <Checkbox stop={ALL} onClick={onClick} data key="all" />
+            <Checkbox stop={ALL} onClick={onClick} checked key="all" />
           ) : (
             <Checkbox stop={ALL} onClick={onClick} key="all" />
           )}
-
           {stops.map(el =>
-            data.includes(el.number) ? (
+            data.includes(el) ? (
               <Checkbox
-                key={el.number + 1}
-                stop={el.number}
+                key={el + 1}
+                stop={el}
                 onClick={onClick}
                 onlyCurrent={onlyCurrent}
-                data
+                checked
               />
             ) : (
               <Checkbox
-                key={el.number}
-                stop={el.number}
+                key={el + 1}
+                stop={el}
                 onClick={onClick}
                 onlyCurrent={onlyCurrent}
               />
@@ -91,9 +91,9 @@ export function App() {
         </div>
       </div>
       <div className={s.right}>
-          {data.map(el => (
-              <Item amount={el} currency={currency} />
-          ))}
+        {data.map(el => (
+          <Item amount={el} currency={currency} />
+        ))}
       </div>
     </div>
   );
