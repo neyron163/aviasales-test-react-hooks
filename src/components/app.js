@@ -6,6 +6,7 @@ import { Item } from "./item/item";
 import { Currency } from "./currency/currency";
 import { DATA, CURRENCY, ALL } from "../data";
 import s from "./index.module.css";
+import uuid from 'uuid';
 
 export function App() {
   const [currency, setCurrency] = useState("RUB");
@@ -39,7 +40,7 @@ export function App() {
           : data.concat([stop])
       );
     }
-    // short variant
+    // variant with ternary
     // setData(
     //   stop === ALL
     //     ? data.length
@@ -56,7 +57,7 @@ export function App() {
         <div className={s.currency}>
           {CURRENCY.map(el => (
             <Currency
-              key={el.name}
+              key={uuid()}
               setCurrency={setCurrency}
               name={el.name}
               currency={currency}
@@ -66,14 +67,14 @@ export function App() {
         <div>
           <div className={s.amountTitle}>Количество пересадок</div>
           {data.length >= originalData.length ? (
-            <Checkbox stop={ALL} onClick={onClick} checked key="all" />
+            <Checkbox stop={ALL} onClick={onClick} checked key={uuid()} />
           ) : (
-            <Checkbox stop={ALL} onClick={onClick} key="all" />
+            <Checkbox stop={ALL} onClick={onClick} key={uuid()} />
           )}
           {stops.map(el =>
             data.includes(el) ? (
               <Checkbox
-                key={el + 1}
+                key={uuid()}
                 stop={el}
                 onClick={onClick}
                 onlyCurrent={onlyCurrent}
@@ -81,7 +82,7 @@ export function App() {
               />
             ) : (
               <Checkbox
-                key={el + 1}
+                key={uuid()}
                 stop={el}
                 onClick={onClick}
                 onlyCurrent={onlyCurrent}
@@ -92,7 +93,7 @@ export function App() {
       </div>
       <div className={s.right}>
         {data.map(el => (
-          <Item amount={el} currency={currency} />
+          <Item amount={el} currency={currency} key={uuid()} />
         ))}
       </div>
     </div>
