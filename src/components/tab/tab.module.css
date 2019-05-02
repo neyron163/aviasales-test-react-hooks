@@ -1,6 +1,8 @@
+@import "../styles.css";
+
 .wrap {
   display: flex;
-  background: #ffffff;
+  background: var(--color-white);
   margin-bottom: 30px;
   height: 130px;
   border-radius: 7px;
@@ -18,31 +20,36 @@
 }
 
 .btn {
-  background: #ff6d00;
+  background: var(--color-orange);
   border: none;
   border-radius: 7px;
   padding: 8px 40px;
   width: 150px;
-  color: white;
+  color: var(--color-white);
   cursor: pointer;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  transition: 0.3s opacity;
+  opacity: 1;
 }
 
-.flight {
+.btn:hover {
+  opacity: .8;
+}
+
+.flightName {
   display: flex;
   justify-content: space-between;
+  font-size: 13px;
+  line-height: 13px;
+  font-weight: var(--font-weight-medium);
+  margin: 7px 0 5px 0;
 }
 
 .date {
   display: flex;
   justify-content: space-between;
-}
-
-.nameFlight {
-  margin-right: 40px;
   font-size: 13px;
-  line-height: 13px;
-  font-weight: 600;
+  color: var(--color-gray);
 }
 
 .dateFlight {
@@ -69,21 +76,21 @@
 .departureTime,
 .arrivalTime {
   font-size: 30px;
-  font-weight: 600;
+  font-weight: var(--font-weight-medium);
 }
 
 .transfer {
-  color: rgb(107, 107, 107);
+  color: var(--color-gray);
   position: relative;
   line-height: 14px;
   font-size: 14px;
 }
 
 .transfer::after {
-  content: '';
+  content: "";
   position: absolute;
   left: 0;
-  background: rgb(107, 107, 107);
+  background: var(--color-gray);
   height: 1px;
   width: 100%;
   bottom: 15px;

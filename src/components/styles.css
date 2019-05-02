@@ -1,0 +1,14 @@
+:root {
+    --font-weight-light: 300;
+    --font-weight-normal: 400;
+    --font-weight-medium: 600;
+    --font-weight-bold: 700;
+
+     /* Common colors */
+     --color-white: #fff;
+     --color-orange: #ff6d00;
+     --color-gray: #8b8b8b;
+     --color-black: #000;
+     --color-light-gray: #d2d5d6;
+     --color-blue: #2196f3;
+}

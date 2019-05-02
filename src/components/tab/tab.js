@@ -9,12 +9,15 @@ export function Tab({
   amount,
   departureTime,
   arrivalTime,
-  flightNameStart,
-  flightNameEnd,
+  destinationName,
+  arrivalName,
   departureDate,
   arrivalDate,
   currency,
+  weekDays,
+  date
 }) {
+  const getDate = date => new Date(date);
   return (
     <Fragment>
       <div className={s.wrap}>
@@ -59,15 +62,25 @@ export function Tab({
           </div>
 
           <div className={s.bottom}>
-            <div className={s.flight}>
-              <div className={s.nameFlight}>
-                {origin},{flightNameStart}
+            <div className={s.flightName}>
+              <div>
+                {origin},{arrivalName}
               </div>
-              <div>{flightNameEnd}</div>
+              <div>{destinationName}</div>
             </div>
             <div className={s.date}>
-              <div className={s.dateFlight}>{departureDate}</div>
-              <div>{arrivalDate}</div>
+              <div className={s.dateFlight}>
+                {arrivalDate.substring(0, 2)}{" "}
+                {date[getDate(departureDate).getDate() - 1]}{" "}
+                {getDate(departureDate).getFullYear()},{" "}
+                {weekDays[getDate(departureDate).getDay()]}
+              </div>
+              <div>
+                {arrivalDate.substring(0, 2)}{" "}
+                {date[getDate(arrivalDate).getDate() - 1]}{" "}
+                {getDate(arrivalDate).getFullYear()},{" "}
+                {weekDays[getDate(arrivalDate).getDay()]}
+              </div>
             </div>
           </div>
         </div>
