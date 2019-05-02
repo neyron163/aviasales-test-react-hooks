@@ -7,4 +7,6 @@
 ### Animation
 ![](https://github.com/neyron163/aviasales-test-react-hooks/blob/master/animation.gif)
 
+I used concat, filter instead splice, slice because this methods are not mutable
+
 made by Neyron 02.05.2019
