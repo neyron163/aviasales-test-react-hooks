@@ -1,4 +1,3 @@
-// @flow
 import React, { useState, useEffect } from "react";
 
 import { Checkbox } from "./checkbox/checkbox";
@@ -6,7 +5,7 @@ import { Item } from "./item/item";
 import { Currency } from "./currency/currency";
 import { DATA, CURRENCY, ALL } from "../data";
 import uuid from "uuid";
-import logoPlane from './images/logoPlane.png';
+import logoPlane from "./images/logoPlane.png";
 import s from "./index.module.css";
 
 export function App() {
@@ -50,7 +49,7 @@ export function App() {
 
   function onClick(stop) {
     if (stop === ALL) {
-      setData(data.length !== originalData.length? [...originalData] : []);
+      setData(data.length !== originalData.length ? [...originalData] : []);
     } else {
       setData(
         data.includes(stop)
@@ -61,62 +60,62 @@ export function App() {
   }
   return (
     <div className={s.app}>
-    <img className={s.logoPlane} src={logoPlane} alt="logoPlane" /> 
-    <div className={s.container}>
-    <div className={s.left}>
-        <div className={s.currencyWrap}>
-          <div className={s.currency}>
-            {CURRENCY.map(el => (
-              <Currency
-                key={uuid()}
-                setCurrency={setCurrency}
-                name={el.name}
-                currency={currency}
-              />
-            ))}
-          </div>
-          <div>
-            <div className={s.amountTitle}>Количество пересадок</div>
-            {data.length >= originalData.length ? (
-              <Checkbox stop={ALL} onClick={onClick} checked key={uuid()} />
-            ) : (
-              <Checkbox stop={ALL} onClick={onClick} key={uuid()} />
-            )}
-            {stops.map(el =>
-              data.includes(el) ? (
-                <Checkbox
+      <img className={s.logoPlane} src={logoPlane} alt="logoPlane" />
+      <div className={s.container}>
+        <div className={s.left}>
+          <div className={s.currencyWrap}>
+            <div className={s.currency}>
+              {CURRENCY.map(el => (
+                <Currency
                   key={uuid()}
-                  stop={el}
-                  onClick={onClick}
-                  onlyCurrent={onlyCurrent}
-                  checked
+                  setCurrency={setCurrency}
+                  name={el.name}
+                  currency={currency}
                 />
+              ))}
+            </div>
+            <div>
+              <div className={s.amountTitle}>Количество пересадок</div>
+              {data.length >= originalData.length ? (
+                <Checkbox stop={ALL} onClick={onClick} checked key={uuid()} />
               ) : (
-                <Checkbox
-                  key={uuid()}
-                  stop={el}
-                  onClick={onClick}
-                  onlyCurrent={onlyCurrent}
-                />
-              )
-            )}
+                <Checkbox stop={ALL} onClick={onClick} key={uuid()} />
+              )}
+              {stops.map(el =>
+                data.includes(el) ? (
+                  <Checkbox
+                    key={uuid()}
+                    stop={el}
+                    onClick={onClick}
+                    onlyCurrent={onlyCurrent}
+                    checked
+                  />
+                ) : (
+                  <Checkbox
+                    key={uuid()}
+                    stop={el}
+                    onClick={onClick}
+                    onlyCurrent={onlyCurrent}
+                  />
+                )
+              )}
+            </div>
           </div>
         </div>
+        <div className={s.right}>
+          {data
+            .sort((a, b) => a - b)
+            .map(el => (
+              <Item
+                amount={el}
+                currency={currency}
+                key={uuid()}
+                weekDays={weekDays}
+                date={date}
+              />
+            ))}
+        </div>
       </div>
-      <div className={s.right}>
-        {data
-          .sort((a, b) => a - b)
-          .map(el => (
-            <Item
-              amount={el}
-              currency={currency}
-              key={uuid()}
-              weekDays={weekDays}
-              date={date}
-            />
-          ))}
-      </div>
-    </div>
     </div>
   );
 }
