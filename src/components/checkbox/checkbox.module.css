@@ -37,11 +37,33 @@
   opacity: 0;
   color: var(--color-blue);
   transition: 0.2s all;
+  font-size: 13px;
+  position: relative;
+  z-index: 1;
 }
 
 .checkbox {
   display: flex;
   cursor: pointer;
+  position: relative;
+}
+
+.checkbox::after {
+  content: '';
+  background: var(--color-blue);
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+  top: -5px;
+  left: -5px;
+  position: absolute;
+  border-radius: 7px;
+  z-index: 0;
+  transition: 0.2s opacity;
+}
+
+.checkbox:hover::after {
+  opacity: 0.1;
 }
 
 .checkbox:hover .only {
@@ -50,4 +72,6 @@
 
 .choosen {
   display: flex;
+  position: relative;
+  z-index: 1;
 }
