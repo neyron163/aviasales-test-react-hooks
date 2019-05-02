@@ -76,29 +76,23 @@ export function App() {
             </div>
             <div>
               <div className={s.amountTitle}>Количество пересадок</div>
-              {data.length >= originalData.length ? (
-                <Checkbox stop={ALL} onClick={onClick} checked key={uuid()} />
-              ) : (
-                <Checkbox stop={ALL} onClick={onClick} key={uuid()} />
-              )}
-              {stops.map(el =>
-                data.includes(el) ? (
-                  <Checkbox
-                    key={uuid()}
-                    stop={el}
-                    onClick={onClick}
-                    onlyCurrent={onlyCurrent}
-                    checked
-                  />
-                ) : (
-                  <Checkbox
-                    key={uuid()}
-                    stop={el}
-                    onClick={onClick}
-                    onlyCurrent={onlyCurrent}
-                  />
-                )
-              )}
+              <Checkbox
+                stop={ALL}
+                onClick={onClick}
+                key={uuid()}
+                originalData={originalData.length}
+                data={data}
+                checked={data.length >= originalData.length}
+              />
+              {stops.map(el => (
+                <Checkbox
+                  key={uuid()}
+                  data={data}
+                  stop={el}
+                  onClick={onClick}
+                  onlyCurrent={onlyCurrent}
+                />
+              ))}
             </div>
           </div>
         </div>

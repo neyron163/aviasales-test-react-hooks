@@ -3,11 +3,16 @@ import s from "./checkbox.module.css";
 import classNames from "classnames";
 import { ALL } from "../../data";
 
-export function Checkbox({ onClick, onlyCurrent, stop, checked }) {
+export function Checkbox({ onClick, onlyCurrent, stop, data, checked }) {
   return (
     <div className={s.checkbox}>
       <div onClick={() => onClick(stop)} className={s.choosen}>
-        <div className={classNames({ [s.check]: checked }, s.handle)} />
+        <div
+          className={classNames(
+            { [s.check]: stop === ALL ? checked : data.includes(stop) },
+            s.handle
+          )}
+        />
         {stop === ALL ? (
           <div className={s.text}>Все пересадки</div>
         ) : stop === 0 ? (
