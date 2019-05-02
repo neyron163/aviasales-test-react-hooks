@@ -3,8 +3,7 @@ import React, { useState, useEffect } from "react";
 import { Checkbox } from "./checkbox/checkbox";
 import { Item } from "./item/item";
 import { Currency } from "./currency/currency";
-import { DATA, CURRENCY, ALL } from "../data";
-import uuid from "uuid";
+import { DATA, CURRENCY, ALL, WEEK_DAYS, DATE } from "../data";
 import logoPlane from "./images/logoPlane.png";
 import s from "./index.module.css";
 
@@ -26,21 +25,8 @@ export function App() {
     setStops(sort);
     setData(sort);
     setOrginalData(sort);
-    setWeekDays(["Вс", "Пн", "Вт", "Ср", "Чт", "Пт", "Сб"]);
-    setDate([
-      "Янв",
-      "Фер",
-      "Мар",
-      "Апр",
-      "Мая",
-      "Июн",
-      "Июл",
-      "Авг",
-      "Сен",
-      "Окт",
-      "Ноя",
-      "Дек"
-    ]);
+    setWeekDays(WEEK_DAYS);
+    setDate(DATE);
   }, []);
 
   function onlyCurrent(stop) {
@@ -67,7 +53,7 @@ export function App() {
             <div className={s.currency}>
               {CURRENCY.map(el => (
                 <Currency
-                  key={uuid()}
+                  key={el.name}
                   setCurrency={setCurrency}
                   name={el.name}
                   currency={currency}
@@ -79,14 +65,13 @@ export function App() {
               <Checkbox
                 stop={ALL}
                 onClick={onClick}
-                key={uuid()}
                 originalData={originalData.length}
                 data={data}
                 checked={data.length >= originalData.length}
               />
               {stops.map(el => (
                 <Checkbox
-                  key={uuid()}
+                  key={el}
                   data={data}
                   stop={el}
                   onClick={onClick}
@@ -101,9 +86,9 @@ export function App() {
             .sort((a, b) => a - b)
             .map(el => (
               <Item
+                key={el}
                 amount={el}
                 currency={currency}
-                key={uuid()}
                 weekDays={weekDays}
                 date={date}
               />

@@ -1,4 +1,4 @@
-import image from './components/images/logo.png';
+import image from "./components/images/logo.png";
 
 export const DATA = {
   tickets: [
@@ -187,14 +187,31 @@ export const DATA = {
 
 export const CURRENCY = [
   {
-    name: "RUB",
+    name: "RUB"
   },
   {
-    name: "USD",
+    name: "USD"
   },
   {
-    name: "EUR",
-  },
-]
+    name: "EUR"
+  }
+];
 
-export const ALL = 'ALL';
+export const ALL = "ALL";
+
+export const WEEK_DAYS = ["Вс", "Пн", "Вт", "Ср", "Чт", "Пт", "Сб"];
+
+export const DATE = [
+  "Янв",
+  "Фер",
+  "Мар",
+  "Апр",
+  "Мая",
+  "Июн",
+  "Июл",
+  "Авг",
+  "Сен",
+  "Окт",
+  "Ноя",
+  "Дек"
+];
